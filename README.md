@@ -7,6 +7,18 @@
 - `backend/`: PDF 인덱싱 및 검색 API
 - `pdf/`: 여기에 PDF를 넣으면 자동으로 인덱싱
 
+## 현재 구조
+- 프론트는 `src/components/` 아래로 컴포넌트 분리
+- 백엔드는 `backend/app/routers/`, `backend/app/services/`, `backend/app/core/`로 분리
+- `backend/main.py`는 실행 진입점만 담당
+
+## 주요 API
+- `POST /api/documents/upload`: 프론트에서 PDF 업로드
+- `POST /api/scan`: `/pdf` 폴더 강제 재스캔
+- `GET /api/documents`: 인덱싱된 문서 목록
+- `POST /api/chat`: 질문 → 검색 → 답변
+- `GET /api/health`: 상태 확인
+
 ## 백엔드 실행(의도)
 ```bash
 cd backend
