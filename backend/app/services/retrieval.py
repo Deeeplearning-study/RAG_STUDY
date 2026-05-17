@@ -28,6 +28,8 @@ def retrieve_sources(question: str, top_k: int) -> List[ChatSource]:
     distances = results.get("distances", [[]])[0]
 
     for idx, (document, metadata, distance) in enumerate(zip(documents, metadatas, distances), start=1):
+        if metadata is None:
+            metadata = {}
         score = max(0.0, 1.0 - float(distance or 0.0))
         sources.append(
             ChatSource(

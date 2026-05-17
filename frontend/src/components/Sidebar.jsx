@@ -1,6 +1,5 @@
 import StatusCards from './sidebar/StatusCards'
 import UploadPanel from './sidebar/UploadPanel'
-import DocumentList from './sidebar/DocumentList'
 
 function Sidebar({ health, documents, uploading, onUploadChange, notice, onRefresh }) {
   return (
@@ -8,7 +7,7 @@ function Sidebar({ health, documents, uploading, onUploadChange, notice, onRefre
       <div className="brand">
         <span className="badge">RAG_STUDY</span>
         <h1>PDF 기반 RAG</h1>
-        <p>문서를 /pdf에 넣거나 직접 업로드해서 Chroma DB에 자동 반영하는 토이 프로젝트용 백엔드/프론트.</p>
+        <p>문서를 /pdf에 넣거나 직접 업로드해서 Chroma DB에 자동 반영하는 백엔드/프론트.</p>
       </div>
 
       <div className="card">
@@ -21,7 +20,6 @@ function Sidebar({ health, documents, uploading, onUploadChange, notice, onRefre
       </div>
 
       <UploadPanel uploading={uploading} onUploadChange={onUploadChange} notice={notice} />
-      <DocumentList documents={documents} />
     </aside>
   )
 }

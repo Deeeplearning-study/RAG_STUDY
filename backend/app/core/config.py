@@ -11,7 +11,7 @@ STATE_FILE = BACKEND_DIR / "index_state.json"
 COLLECTION_NAME = "rag_study_docs"
 EMBEDDING_MODEL = os.getenv(
     "RAG_EMBEDDING_MODEL",
-    "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "jhgan/ko-sroberta-multitask",
 )
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "gemma4:e4b")

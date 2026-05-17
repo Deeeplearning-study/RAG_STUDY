@@ -104,16 +104,22 @@ def sync_pdf_folder() -> Dict[str, Any]:
             removed.append(indexed_path)
             del files_state[indexed_path]
 
+    if removed:
+        save_state(state)
+
     indexed = []
     skipped = []
     for path in sorted(current_files.values(), key=lambda item: item.name.lower()):
-        result = ingest_pdf(path)
-        if result.get("skipped"):
-            skipped.append(result["filename"])
-        else:
-            indexed.append(result["filename"])
+        try:
+            result = ingest_pdf(path)
+            if result.get("skipped"):
+                skipped.append(result["filename"])
+            else:
+                indexed.append(result["filename"])
+        except Exception as e:
+            print(f"Error indexing {path.name}: {e}", flush=True)
+            skipped.append(f"{path.name} (failed)")
 
-    save_state(state)
     return {"indexed": indexed, "skipped": skipped, "removed": removed}
 
 

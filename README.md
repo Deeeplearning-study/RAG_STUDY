@@ -1,7 +1,5 @@
 # RAG_STUDY
 
-토이프로젝트용 PDF RAG 구조입니다.
-
 ## 구성
 - `frontend/`: React UI
 - `backend/`: PDF 인덱싱 및 검색 API

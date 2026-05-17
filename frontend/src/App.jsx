@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Sidebar from './components/Sidebar'
 import ChatPanel from './components/chat/ChatPanel'
+import DocumentList from './components/sidebar/DocumentList'
 import { API_BASE, requestJson } from './lib/api'
 import './App.css'
 
@@ -158,7 +159,7 @@ function App() {
       <main className="main">
         <header className="topbar">
           <div>
-            <p className="eyebrow">토이 프로젝트용 RAG 백엔드</p>
+            <p className="eyebrow">의료 RAG</p>
             <h2>질문 → 검색 → 답변</h2>
           </div>
           <button className="ghost-btn" type="button" onClick={refreshAll}>
@@ -177,21 +178,7 @@ function App() {
             onSubmit={sendQuestion}
             endRef={endRef}
           />
-
-          <aside className="side-panel card">
-            <h3>구현 범위 체크</h3>
-            <ul className="checklist">
-              <li>PDF 업로드 지원</li>
-              <li>/pdf 폴더 자동 스캔</li>
-              <li>Chroma DB 저장</li>
-              <li>문서 출처 반환</li>
-              <li>Ollama 연결 준비</li>
-            </ul>
-            <div className="divider" />
-            <p className="hint">
-              나중에 좋은 PC로 옮기면 <code>OLLAMA_MODEL</code>만 바꿔서 Gemma 계열 응답으로 붙일 수 있게 해뒀어요.
-            </p>
-          </aside>
+          <DocumentList documents={documents} className="side-panel card" />
         </section>
 
       </main>

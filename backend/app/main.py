@@ -29,5 +29,4 @@ def read_root():
 
 @app.on_event("startup")
 def startup_event() -> None:
-    sync_pdf_folder()
     start_folder_watcher()

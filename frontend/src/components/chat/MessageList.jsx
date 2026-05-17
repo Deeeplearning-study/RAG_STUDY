@@ -1,3 +1,5 @@
+import ReactMarkdown from 'react-markdown'
+
 function MessageList({ messages }) {
   return (
     <div className="messages">
@@ -8,7 +10,9 @@ function MessageList({ messages }) {
               <strong>{message.role === 'user' ? 'You' : 'Assistant'}</strong>
               <span>{message.time}</span>
             </div>
-            <p>{message.content}</p>
+            <div className="markdown-content">
+              <ReactMarkdown>{message.content}</ReactMarkdown>
+            </div>
           </div>
 
           {message.sources?.length ? (

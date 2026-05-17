@@ -54,6 +54,8 @@
 .sidebar .card {
   padding: 16px;
   margin-top: 14px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .card h2,
@@ -314,6 +316,24 @@
 .doc-list {
   display: grid;
   gap: 10px;
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Custom scrollbar for doc-list */
+.doc-list::-webkit-scrollbar {
+  width: 6px;
+}
+.doc-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.doc-list::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 999px;
+}
+.doc-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
 }
 
 .doc-item {
@@ -323,10 +343,20 @@
   border: 1px solid rgba(148, 163, 184, 0.18);
   display: grid;
   gap: 4px;
+  min-width: 0;
+  transition: background 0.15s ease;
+}
+
+.doc-item:hover {
+  background: #f1f5f9;
 }
 
 .doc-item strong {
   font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 .doc-item span {
@@ -377,4 +407,79 @@
   .bubble {
     max-width: 100%;
   }
+}
+
+.markdown-content {
+  line-height: 1.65;
+  color: inherit;
+}
+
+.markdown-content p {
+  margin: 0 0 12px;
+}
+
+.markdown-content p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-content strong {
+  color: #0f172a;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3 {
+  margin: 16px 0 8px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.markdown-content h1 { font-size: 20px; }
+.markdown-content h2 { font-size: 18px; }
+.markdown-content h3 { font-size: 16px; }
+
+.markdown-content ul,
+.markdown-content ol {
+  margin: 0 0 12px;
+  padding-left: 20px;
+}
+
+.markdown-content li {
+  margin-bottom: 4px;
+}
+
+.markdown-content li:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-content code {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 0.9em;
+  background: rgba(148, 163, 184, 0.15);
+  padding: 3px 6px;
+  border-radius: 6px;
+  color: #6366f1;
+}
+
+/* User bubbles code representation */
+.message.user .markdown-content code {
+  color: #4f46e5;
+  background: rgba(79, 70, 229, 0.08);
+}
+
+.markdown-content pre {
+  margin: 12px 0;
+  padding: 12px;
+  background: #0f172a;
+  border-radius: 12px;
+  overflow-x: auto;
+  color: #e2e8f0;
+}
+
+.markdown-content pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: 13px;
+  color: inherit;
 }
