@@ -5,8 +5,22 @@ frontend/dist/
 # Python / backend
 backend/.venv/
 backend/__pycache__/
-backend/*.pyc
+backend/**/*.pyc
+backend/**/__pycache__/
 backend/.python-version
+
+# Local virtualenv / dependency cache
+/.venv/
+/.deps/
+
+# Runtime-generated backend data
+backend/chroma_db/
+backend/index_state.json
+backend_boot.log
+
+# Uploaded PDFs live here locally, keep the folder but ignore contents
+pdf/*
+!pdf/.gitkeep
 
 # Misc
 .DS_Store
