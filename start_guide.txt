@@ -1,0 +1,15 @@
+1. 터미널에서 tmux attach -t rag 입력하면 양쪽으로 2개 터미널 창이 나옴
+
+2. 왼쪽 터미널은 프론트 / 오른쪽 터미널은 백엔드
+
+3. 작업 경로는 ~/home/seongjun/seongjun/RAG_STUDY
+
+4. 왼쪽 터미널에서 cd frontend / 오른쪽 터미널에서 cd backend
+
+5. 프론트 시작은 npm run dev -- --host 0.0.0.0
+
+6. 백엔드 시작은 uv run main.py (ollama 켜져있는지 확인!!!)
+
+6-1. ollama list 했을때 에러가 난다면 ollama 안켜져있는거 -> tmux attach -t ollama 해서 오른쪽 터미널에 ollama serve 로 ollama 켜기
+
+7. 프론트 포트는 8000 포트로 세팅해뒀고, 프론트에서 rag 잘 동작 하는지 확인할 것
