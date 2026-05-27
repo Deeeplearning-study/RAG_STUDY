@@ -17,6 +17,9 @@ OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "gemma4:e4b")
 SCAN_INTERVAL_SECONDS = int(os.getenv("PDF_SCAN_INTERVAL", "10"))
 TOP_K = int(os.getenv("RAG_TOP_K", "4"))
+ENABLE_RERANKER = os.getenv("RAG_ENABLE_RERANKER", "true").lower() == "true"
+RERANKER_MODEL = os.getenv("RAG_RERANKER_MODEL", "BAAI/bge-reranker-v2-m3")
+RERANK_CANDIDATES = int(os.getenv("RAG_RERANK_CANDIDATES", "24"))
 
 PDF_DIR.mkdir(parents=True, exist_ok=True)
 CHROMA_DIR.mkdir(parents=True, exist_ok=True)
