@@ -40,6 +40,9 @@ npm run dev
 ## 환경 변수
 - `RAG_EMBEDDING_MODEL`
 - `RAG_TOP_K`
+- `RAG_ENABLE_RERANKER` (`true`/`false`, 기본값 `true`)
+- `RAG_RERANKER_MODEL` (기본값 `BAAI/bge-reranker-v2-m3`)
+- `RAG_RERANK_CANDIDATES` (reranking 전 Chroma 후보 수, 기본값 `24`)
 - `PDF_SCAN_INTERVAL`
 - `OLLAMA_BASE_URL`
 - `OLLAMA_MODEL`

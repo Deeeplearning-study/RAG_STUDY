@@ -12,6 +12,7 @@ backend/.python-version
 # Local virtualenv / dependency cache
 /.venv/
 /.deps/
+/.agents/
 
 # Runtime-generated backend data
 backend/chroma_db/

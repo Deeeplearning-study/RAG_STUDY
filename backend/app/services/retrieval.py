@@ -3,7 +3,9 @@ from __future__ import annotations
 from typing import List
 
 from app.core.chroma import get_collection, get_model
+from app.core.config import ENABLE_RERANKER, RERANK_CANDIDATES
 from app.schemas import ChatSource
+from app.services.reranking import rerank_documents
 
 _collection = get_collection()
 
@@ -18,7 +20,7 @@ def retrieve_sources(question: str, top_k: int) -> List[ChatSource]:
     ).tolist()[0]
     results = _collection.query(
         query_embeddings=[question_embedding],
-        n_results=top_k,
+        n_results=max(top_k, RERANK_CANDIDATES) if ENABLE_RERANKER else top_k,
         include=["documents", "metadatas", "distances"],
     )
 
@@ -27,10 +29,25 @@ def retrieve_sources(question: str, top_k: int) -> List[ChatSource]:
     metadatas = results.get("metadatas", [[]])[0]
     distances = results.get("distances", [[]])[0]
 
-    for idx, (document, metadata, distance) in enumerate(zip(documents, metadatas, distances), start=1):
+    rows = list(zip(documents, metadatas, distances))
+    score_is_rerank = False
+    if ENABLE_RERANKER and rows:
+        try:
+            ranked = rerank_documents(question, [str(document) for document, _, _ in rows])
+            rows = [(rows[idx][0], rows[idx][1], score) for idx, score in ranked[:top_k]]
+            score_is_rerank = True
+        except Exception:
+            rows = rows[:top_k]
+    else:
+        rows = rows[:top_k]
+
+    for idx, (document, metadata, score_value) in enumerate(rows, start=1):
         if metadata is None:
             metadata = {}
-        score = max(0.0, 1.0 - float(distance or 0.0))
+        if score_is_rerank:
+            score = float(score_value or 0.0)
+        else:
+            score = max(0.0, 1.0 - float(score_value or 0.0))
         sources.append(
             ChatSource(
                 title=str(metadata.get("title") or metadata.get("filename") or "document"),
